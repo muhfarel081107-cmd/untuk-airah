@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu ❤️</title>
+    <!-- Font Google yang Romantis -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <!-- Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        /* --- ANIMASI HUJAN HATI (Background) --- */
+        .heart-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            display: none; /* Baru muncul setelah login */
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4b6e;
+            font-size: 20px;
+            animation: fall linear infinite;
+            opacity: 0.7;
+            bottom: -20px;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- LOGIN PAGE --- */
+        #login-container {
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        p.subtitle {
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            outline: none;
+            text-align: center;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            transition: 0.3s;
+        }
+
+        input[type="password"]:focus {
+            box-shadow: 0 0 10px #ff4b6e;
+        }
+
+        button {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- MAIN CONTENT (HALAMAN UTAMA) --- */
+        #main-container {
+            display: none; /* Tersembunyi dulu */
+            z-index: 10;
+            text-align: center;
+            animation: popUp 1s ease;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            color: #444;
+        }
+
+        .foto-kekasih {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ff4b6e;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .greeting {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff4b6e;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        /* --- ANIMASI KESALAHAN LOGIN --- */
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        /* Musik Player Tersembunyi */
+        audio { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Efek Hujan Hati -->
+    <div class="heart-bg" id="heart-bg"></div>
+
+    <!-- Audio Background (Lagu Romantis) -->
+    <!-- Kamu bisa ganti link mp3 ini dengan lagu kesukaan dia -->
+    <audio id="bg-music" loop>
+         <source src="https://cdn.jsdelivr.net/gh/muhfarel081107-cmd/music-host@main/radio.mp3" type="audio/mpeg"> </audio>
+
+    <!-- Halaman Login -->
+    <div id="login-container">
+        <i class="fas fa-heart fa-3x" style="color: #fff; margin-bottom: 15px;"></i>
+        <h1>Hai, Sayang!</h1>
+        <p class="subtitle">Masukkan password untuk masuk ke hatinya<br><small>(Hint: Tanggal jadian kita)</small></p>
+        
+        <input type="password" id="passwordInput" placeholder="Masukkan Password...">
+        <br>
+        <button onclick="cekLogin()">Buka Cinta <i class="fas fa-lock-open"></i></button>
+    </div>
+
+    <!-- Halaman Utama (Isi Konten) -->
+    <div id="main-container">
+        <div class="card">
+            <!-- Ganti URL foto di bawah dengan foto pacar kamu -->
+            <a href="https://ibb.co.com/bywBL7t"><img src="https://i.ibb.co.com/bywBL7t/Whats-App-Image-2026-02-27-at-19-15-22.jpg" alt="Whats-App-Image-2026-02-27-at-19-15-22" border="0"></a>
+            
+            <div class="greeting">Selamat Siang, Cantikku! ☀️❤️</div>
+            
+            <p class="message">
+                HALOOOOOO Airah Sayangggg How are feel today? im just wanna say to you
+                i love you sayangggg,kusayang sekali kiiiiii
+            </p>
+            
+            <p class="message" style="font-weight: bold; color: #ff4b6e;">
+                Aku sayang kamu! ❤️
+            </p>
+
+            <div class="signature">
+                - Dari Orang yang paling mencintaimu -
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- KONFIGURASI ---
+        const passwordBenar = "010126"; // Ganti ini dengan password yang kamu inginkan (misal: nama kamu)
+        
+        // --- FUNGSI LOGIN ---
+        function cekLogin() {
+            const input = document.getElementById('passwordInput').value;
+            const container = document.getElementById('login-container');
+            
+            if (input === passwordBenar) {
+                // Jika benar:
+                container.style.display = 'none'; // Sembunyikan login
+                
+                // Munculkan konten utama
+                const mainContainer = document.getElementById('main-container');
+                mainContainer.style.display = 'block';
+                
+                // Mulai hujan hati
+                mulaiHujanHati();
+                
+                // Coba play musik (browser lama/mobile mungkin perlu interaksi user dulu)
+                const audio = document.getElementById('bg-music');
+                audio.volume = 0.5;
+                audio.play().catch(error => console.log("Autoplay dicegah browser, tapi musik siap diputar."));
+                
+            } else {
+                // Jika salah:
+                container.classList.add('shake');
+                document.getElementById('passwordInput').value = "";
+                document.getElementById('passwordInput').placeholder = "Salah dong, coba lagi! 😘";
+                
+                // Hapus class shake setelah animasi selesai
+                setTimeout(() => {
+                    container.classList.remove('shake');
+                }, 500);
+            }
+        }
+
+        // --- FUNGSI HUJAN HATI ---
+        function mulaiHujanHati() {
+            const bg = document.getElementById('heart-bg');
+            bg.style.display = 'block';
+            
+            // Membuat 50 elemen hati
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                
+                // Posisi acak
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's'; // 2-4 detik
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                
+                bg.appendChild(heart);
+            }
+        }
+
+        // Biar bisa tekan Enter di keyboard
+        document.getElementById("passwordInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                cekLogin();
+            }
+        });
+    </script>
+</body>
+</html>
